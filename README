@@ -1,0 +1,12 @@
+= Product Documents
+
+Add and manage product-specific documents for your Spree ecommerce store.
+
+Currently supports Microsoft Word, Microsft Excel, and PDF documents.
+
+This extension has only been tested with Spree 0.11.x
+
+= TODO:
+
+- Add document configurations under admin panel to override default icons, and to add additional file types.
+- Add document manager to manage ALL documents in admin panel
