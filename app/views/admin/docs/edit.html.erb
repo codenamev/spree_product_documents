@@ -1,0 +1,19 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Documents"} %>
+
+<%= error_messages_for :doc %>
+
+<% form_for(:doc, :url => admin_product_doc_url(@product), :html => { :method => :put, :multipart => true }) do |f| %>
+  <table class="basic-table">
+    <tr>
+      <td><%= image_tag( get_doc_icon(@doc) ) %></td>
+      <td><%= @doc.attachment.original_filename %></td>
+    </tr>
+    <%= render :partial => "form", :locals => { :f => f } %>
+  </table>
+  <p class="form-buttons">
+    <%= button t("update") %>
+    or <%= link_to t("cancel"), admin_product_docs_url(@product), :id => "cancel_link" %>
+  </p>
+<% end %>

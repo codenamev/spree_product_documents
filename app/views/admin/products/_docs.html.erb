@@ -1,0 +1,5 @@
+    <% if url_options_authenticate?(:controller => 'admin/docs') %>
+      <li<%= ' class="active"' if current == "Documents" %>>
+        <%= link_to "Documents", admin_product_docs_url(@product) %>
+      </li>
+    <% end %>

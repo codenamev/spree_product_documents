@@ -1,0 +1,44 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Documents"} %>
+
+<table class="index">
+	<tr>
+	  <th><%= t("type") %></th>
+          <th><%= t("document_name") %></th>
+	  <th><%= t("action") %></th>
+	</tr>
+ 
+  <% @product.docs.each do |doc| %>
+    <tr id="<%= dom_id(doc) %>">
+      <td><%= image_tag(get_doc_icon(doc), :align => 'left') %></td>
+      <td><%= link_to(doc.attachment.original_filename, doc.attachment.url) %></td>
+      <td class="actions">
+        <%= link_to_with_icon('edit', t("edit"), edit_admin_product_doc_url(@product, doc)) %>
+        &nbsp;
+        <%= link_to_delete doc, {:url => admin_product_doc_url(@product, doc) }%>
+      </td>
+    </tr>
+  <% end %>
+ 
+</table>
+
+<div id="docs"></div>
+<br/>
+<p>
+    <%= link_to icon('add') + ' ' + t("new_document"), new_admin_product_doc_url(@product), :id => "new_doc_link" %>
+</p>
+
+<% content_for :head do %>
+  <script type="text/javascript">
+    jQuery(document).ready(function(){  
+      
+      jQuery('#new_doc_link').click(function (event) { 
+        event.preventDefault();
+        jQuery(this).hide();
+        jQuery.ajax({type: 'GET', url: this.href, data: ({authenticity_token: AUTH_TOKEN}), success: function(r){ jQuery('#docs').html(r);} });
+      });
+      
+    });
+  </script>
+<% end %>
