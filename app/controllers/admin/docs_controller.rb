@@ -11,7 +11,7 @@ class Admin::DocsController < Admin::BaseController
   end
 
   update.response do |wants|
-	wants.html {redirect_to admin_product_docs_url(@product)}
+    wants.html {redirect_to admin_product_docs_url(@product)}
   end
 	
   create.before :set_viewable
@@ -31,13 +31,13 @@ class Admin::DocsController < Admin::BaseController
   end
 
   def set_viewable
-    if params[:doc].has_key? :viewable_id
-	if params[:image][:viewable_id] == "All"
-		object.viewable = @product
-	else
-		object.viewable_type = 'Product'
-		object.viewable_id = @product.id
-	end
+    if !params[:doc].empty? and params[:doc].has_key? :viewable_id
+      if params[:image][:viewable_id] == "All"
+	  object.viewable = @product
+      else
+	  object.viewable_type = 'Product'
+	  object.viewable_id = @product.id
+      end
     else
 	object.viewable = @product
     end

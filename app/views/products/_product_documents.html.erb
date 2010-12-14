@@ -1,0 +1,17 @@
+<% if @product and !@product.docs.empty? %>
+<table>
+  <tr>
+	<td><h3><%= t("product_documents") %></h3></td>
+  </tr>
+  <% if @product.docs.empty? %>
+    <tr><td><p><%= t("none") %></p></td></tr>
+  <% else %>
+    <% for product_doc in @product.docs %>
+      <tr><td class="product-documents">
+        <p>
+          <%= link_to( image_tag(get_doc_icon(product_doc))+get_doc_name(product_doc.attachment.original_filename), product_doc.attachment.url) %></p>
+      </td></tr>
+    <% end %>
+  <% end %>
+</table>
+<% end %>

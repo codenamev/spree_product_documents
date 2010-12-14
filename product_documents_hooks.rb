@@ -2,6 +2,8 @@ class ProductDocumentsHooks < Spree::ThemeSupport::HookListener
   
   insert_after :admin_product_tabs, "admin/products/docs" 
 
+  insert_after :product_properties, "products/product_documents"#, :product => @product
+
   # 
   # TODO: add document type configurations
   # insert_after :admin_configurations_sidebar_menu do
