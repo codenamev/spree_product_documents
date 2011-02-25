@@ -9,7 +9,7 @@
     <% for product_doc in @product.docs %>
       <tr><td class="product-documents">
         <p>
-          <%= link_to( image_tag(get_doc_icon(product_doc))+get_doc_name(product_doc.attachment.original_filename), product_doc.attachment.url) %></p>
+          <%= link_to( image_tag(get_doc_icon(product_doc))+get_doc_name(product_doc.attachment.original_filename), product_doc.attachment.url, { :target => "_blank" }) %></p>
       </td></tr>
     <% end %>
   <% end %>

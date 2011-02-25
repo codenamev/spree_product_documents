@@ -1,6 +1,6 @@
 class Doc < Asset
   has_attached_file :attachment,
-                    :url => ":rails_root/assets/products/:id/:style/:basename.:extension",
+                    :url => "/assets/products/:id/:style/:basename.:extension",
                     :path => ":rails_root/public/assets/products/:id/:style/:basename.:extension"
 
   before_post_process :skip_thumbnail_creation
