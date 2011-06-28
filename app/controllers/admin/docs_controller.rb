@@ -1,30 +1,25 @@
-class Admin::DocsController < Admin::BaseController
-  resource_controller
+class Admin::DocsController < Admin::ResourceController
   before_filter :load_data
-	
-  new_action.response do |wants|
-  	wants.html {render :action => :new, :layout => false}
-  end
-
-  create.response do |wants|
-	wants.html {redirect_to admin_product_docs_url(@product)}
-  end
-
-  update.response do |wants|
-    wants.html {redirect_to admin_product_docs_url(@product)}
-  end
 	
   create.before :set_viewable
   update.before :set_viewable
   destroy.before :destroy_before
-  
-  destroy.response do |wants| 
-    wants.html do
-	render :text => ""
+
+  def update_positions
+    params[:positions].each do |id, index|
+      Doc.update_all(['position=?', index], ['id=?', id])
+    end
+
+    respond_to do |format|
+      format.js { render :text => 'Ok' }
     end
   end
- 
+  
   private
+
+  def location_after_save
+    admin_product_docs_url(@product)
+  end
 
   def load_data
     @product = Product.find_by_permalink(params[:product_id])
@@ -32,20 +27,20 @@ class Admin::DocsController < Admin::BaseController
 
   def set_viewable
     if !params[:doc].empty? and params[:doc].has_key? :viewable_id
-      if params[:image][:viewable_id] == "All"
-	  object.viewable = @product
+      if params[:doc][:viewable_id] == "All"
+        @doc.viewable = @product
       else
-	  object.viewable_type = 'Product'
-	  object.viewable_id = @product.id
+	      @doc.viewable_type = 'Product'
+	      @doc.viewable_id = @product.id
       end
     else
-	object.viewable = @product
+	    @doc.viewable = @product
     end
   end
 	
   def update_before
-     object.viewable_type = 'Product'
-     object.viewable_id = @product.id
+     @doc.viewable_type = 'Product'
+     @doc.viewable_id = @product.id
   end
 
   def destroy_before 

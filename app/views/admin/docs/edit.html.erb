@@ -2,7 +2,7 @@
 
 <%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Documents"} %>
 
-<%= error_messages_for :doc %>
+<%= render "shared/error_messages", :target => @doc %>
 
 <% form_for(:doc, :url => admin_product_doc_url(@product), :html => { :method => :put, :multipart => true }) do |f| %>
   <table class="basic-table">
@@ -14,6 +14,6 @@
   </table>
   <p class="form-buttons">
     <%= button t("update") %>
-    or <%= link_to t("cancel"), admin_product_docs_url(@product), :id => "cancel_link" %>
+    <%= t('or') %> <%= link_to t("cancel"), admin_product_docs_url(@product), :id => "cancel_link" %>
   </p>
 <% end %>

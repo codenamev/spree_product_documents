@@ -1,4 +1,5 @@
 class Doc < Asset
+  validate :no_attachment_errors
   has_attached_file :attachment,
                     :url => "/assets/products/:id/:style/:basename.:extension",
                     :path => ":rails_root/public/assets/products/:id/:style/:basename.:extension"
@@ -8,7 +9,7 @@ class Doc < Asset
   ALLOWED_CONTENT_TYPES = [ "application/msword","application/vnd.ms-excel","application/pdf" ]
   ALLOWED_FILE_EXTENSIONS = [ "pdf", "doc", "docx", "xls", "xlsx" ]
 
-  def validate
+  def no_attachment_errors
     unless attachment.errors.empty?
       # uncomment this to get rid of the less-than-useful interrim messages
       # errors.clear 

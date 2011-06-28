@@ -2,7 +2,7 @@
 
 <%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Documents"} %>
 
-<table class="index">
+<table class="index sortable">
 	<tr>
 	  <th><%= t("type") %></th>
           <th><%= t("document_name") %></th>
@@ -11,10 +11,13 @@
  
   <% @product.docs.each do |doc| %>
     <tr id="<%= dom_id(doc) %>">
-      <td><%= image_tag(get_doc_icon(doc), :align => 'left') %></td>
+      <td>
+        <span class="handle"></span>
+        <%= image_tag(get_doc_icon(doc), :align => 'left') %>
+      </td>
       <td><%= link_to(doc.attachment.original_filename, doc.attachment.url) %></td>
       <td class="actions">
-        <%= link_to_with_icon('edit', t("edit"), edit_admin_product_doc_url(@product, doc)) %>
+        <%= link_to_with_icon('edit', t("edit"), edit_admin_product_doc_url(@product, doc), :class => 'edit') %>
         &nbsp;
         <%= link_to_delete doc, {:url => admin_product_doc_url(@product, doc) }%>
       </td>

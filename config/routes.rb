@@ -1,7 +1,7 @@
-# Put your extension routes here.
-
-map.namespace :admin do |admin|
-  admin.resources :products do |product|
-    product.resources :docs
+Rails.application.routes.draw do
+  namespace :admin do
+    resources :products do
+      resources :docs
+    end
   end
-end  
+end
