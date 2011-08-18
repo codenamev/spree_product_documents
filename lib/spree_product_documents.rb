@@ -5,11 +5,6 @@ module SpreeProductDocuments
   class Engine < Rails::Engine
     def self.activate
 
-      # Make the Doc Helper available to all views
-      Spree::BaseController.class_eval do
-        helper DocsHelper
-      end
-      
       Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
         Rails.env == "production" ? require(c) : load(c)
       end
