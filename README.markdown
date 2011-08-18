@@ -7,7 +7,7 @@ SUPPORTS
 ========
 
 * Currently supports Microsoft Word, Microsft Excel, and PDF documents.
-* This extension has only been tested with Spree 0.11.x
+* This extension has only been tested with Spree 0.11.x, and 0.60.x
 
 TODO:
 =====
