@@ -1,6 +1,7 @@
 <h4><%= t("new_document") %></h4>
-<% form_for(:doc, :url => { :controller => 'docs', :action => 'create' }, :html => { :multipart => true }) do |form| %>
-  <table class="basic-table">
+<%= form_for(:doc, :url => { :controller => 'docs', :action => 'create' }, :html => { :multipart => true }) do |form| %>
+
+<table class="basic-table">
     <%= render :partial => "form", :locals => { :f => form } %>
   </table>
   <p class="form-buttons">
@@ -17,6 +18,3 @@
   });  
  
 </script>
-
- 
- 
